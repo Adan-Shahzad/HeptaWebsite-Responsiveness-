@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+/*Footer Started*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.footer {
+  background-color: #111;
+  color: #ccc;
+  padding: 50px 20px 20px;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.footer-col {
+  flex: 1 1 220px;
+  margin: 20px;
+}
+.footer-col h4 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.footer-col ul {
+  list-style: none;
+}
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ccc;
+  display: block;
+  margin: 8px 0;
+  transition: color 0.3s;
+}
+.footer-col ul li a:hover {
+  color: #4CAF50;
+}
+.footer-col p, .footer-col a {
+  font-size: 15px;
+  color: #ccc;
+  line-height: 1.6;
+}
+.footer-col em {
+  font-style: italic;
+  font-weight: 400;
+}
+.subscribe-form {
+  display: flex;
+  border-bottom: 1px solid #666;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+.subscribe-form input {
+  flex: 1;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  outline: none;
+}
+.subscribe-form button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.subscribe-form button:hover {
+  color: #4CAF50;
+}
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #222;
+  color: #888;
+  font-size: 14px;
+}
+.footer-bottom span {
+  color: white;
+}
+.social-icons {
+      margin-top: 10px;
+      text-align: center;
+    }
+.social-icons a {
+  margin-right:50px;
+      color: white;
+      margin: 0 15px;
+      font-size: 22px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.3s;
+    }
+.social-icons a:hover {
+      color:#70c5c5; 
+    }
+/*Footer Ended*/
+
+/* Fade-in animation for main elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+/* Hero section animations */
+.background {
+    animation: fadeInDown 1s ease-out;
+}
+.text-content h1 {
+    animation: fadeInUp 1.2s ease-out 0.3s both;
+}
+.text-content p {
+    animation: fadeInUp 1.2s ease-out 0.6s both;
+}
+.hepta-button {
+    animation: fadeInLeft 1s ease-out 0.2s both;
+    transition: all 0.3s ease;
+}
+.hepta-button:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+/* Form container animations */
+.container1 {
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+.contact-form {
+    animation: fadeInLeft 1.2s ease-out 1s both;
+    transition: all 0.3s ease;
+}
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+.contact-info {
+    animation: fadeInRight 1.2s ease-out 1.2s both;
+}
+/* Form input animations */
+.contact-form input,
+.contact-form textarea {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(112, 197, 197, 0.3);
+    border-color: #70c5c5;
+}
+.contact-form label {
+    transition: all 0.3s ease;
+}
+.contact-form input:focus + label,
+.contact-form textarea:focus + label {
+    color: #70c5c5;
+    transform: translateY(-2px);
+}
+/* Submit button animation */
+.contact-form button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #70c5c5, #5ab3b3);
+    color: white !important;
+}
+.contact-form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+.contact-form button:hover::before {
+    left: 100%;
+}
+.contact-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(112, 197, 197, 0.4);
+}
+.contact-form button:active {
+    transform: translateY(0);
+}
+/* Contact info animations */
+.contact-info h2 {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.contact-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #70c5c5;
+    transition: width 0.3s ease;
+}
+.contact-info:hover h2::after {
+    width: 100%;
+}
+.contact-info p {
+    transition: all 0.3s ease;
+}
+.contact-info p:hover {
+    transform: translateX(10px);
+    color: #70c5c5 !important;
+}
+/* Customer testimonials animations */
+.image-gallery h1 {
+    animation: fadeInUp 1s ease-out both;
+    position: relative;
+}
+.image-gallery h1::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(45deg, #70c5c5, #5ab3b3);
+    border-radius: 2px;
+    animation: slideInScale 1s ease-out 0.5s both;
+}
+.customer {
+    opacity: 0;
+    animation: slideInScale 0.8s ease-out both;
+    transition: all 0.4s ease;
+}
+.customer:nth-child(2) { animation-delay: 0.2s; }
+.customer:nth-child(3) { animation-delay: 0.4s; }
+.customer:nth-child(4) { animation-delay: 0.6s; }
+.customer:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+.customer img {
+    transition: all 0.4s ease;
+}
+.customer:hover img {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(112, 197, 197, 0.3);
+}
+.customer .quote {
+    transition: all 0.3s ease;
+}
+.customer:hover .quote {
+    color: #70c5c5;
+}
+.customer .name {
+    transition: all 0.3s ease;
+    position: relative;
+}
+.customer:hover .name {
+    transform: translateX(5px);
+}
+/* Background parallax effect */
+@keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.background {
+    background-size: 120% 120%;
+    animation: backgroundShift 20s ease-in-out infinite;
+}
+/* Loading animation for page load */
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+body {
+    animation: pageLoad 0.8s ease-out;
+}
+/* Scroll-triggered animations (add this JavaScript separately) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/*form */
+ /* General Container Style */
+.container1 {
+    display: flex;
+    flex-direction: row; /* Ensure items are side by side */
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px; /* Added padding for better spacing */
+}
+/* Contact Form Style */
+.contact-form {
+    flex: 1; /* Allows the form to take available space */
+    margin-right: 10px; /* Space between form and other content */
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Input and Textarea Style */
+.contact-form input,
+.contact-form textarea {
+    width: 100%; /* Full width for all inputs */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding does not affect overall width */
+}
+/* Button Style */
+.contact-form button {
+    color: black;
+    background-color: #70c5c5; /* Added background color for visibility */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+/* Contact Info Style */
+.contact-info {
+    flex: 1; /* Allows the contact info to take available space */
+    padding: 50px;
+    margin-left: 60px; /* Additional margin for spacing */
+}
+/* Heading Style */
+.contact-info h2 {
+    margin: 10px 0;
+    color: #70c5c5;
+}
+/* Paragraph Style */
+.contact-info p {
+    margin: 0 0 10px;
+    color: black;
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container1 {
+        flex-direction: column; /* Stack elements in column layout */
+    }
+
+    .contact-form, .contact-info {
+        margin-right: 0; /* Remove right margin */
+        margin-left: 0; /* Remove left margin */
+        padding: 10px; /* Reduce padding */
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .contact-info {
+        padding: 20px; /* Reduced padding for better spacing */
+    }
+}
+/* New Sidebar Styles */
+.Sidebar {
+    position: fixed;
+    top: 10%;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: aliceblue;
+    backdrop-filter: blur(20px);
+    border-radius: 50%;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%);
+    overflow: hidden;
+}
+.Sidebar.active {
+    width: 300px;
+    height: 470px;
+    border-radius: 20px;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+.Sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(112, 197, 197, 0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease 0.2s;
+}
+.Sidebar.active .Sidebar-header {
+    opacity: 1;
+    transform: translateY(0);
+}
+.Logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.Nav-menu {
+    list-style: none;
+    padding: 10px 0;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease 0.3s;
+}
+.Sidebar.active .Nav-menu {
+    opacity: 1;
+    transform: scale(1);
+}
+.Nav-item {
+    margin: 0;
+    opacity: 0;
+    transform: translateX(30px) rotate(10deg);
+    transition: all 0.4s ease;
+}
+.Sidebar.active .Nav-item {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+}
+
+.Sidebar.active .Nav-item:nth-child(1) { transition-delay: 0.4s; }
+.Sidebar.active .Nav-item:nth-child(2) { transition-delay: 0.5s; }
+.Sidebar.active .Nav-item:nth-child(3) { transition-delay: 0.6s; }
+.Sidebar.active .Nav-item:nth-child(4) { transition-delay: 0.7s; }
+.Sidebar.active .Nav-item:nth-child(5) { transition-delay: 0.8s; }
+.Sidebar.active .Nav-item:nth-child(6) { transition-delay: 0.9s; }
+.Nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color:black;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 2px 10px;
+}
+.Nav-link:hover {
+    color: white;
+    background: rgba(112, 197, 197, 0.3);
+    transform: translateX(-5px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(112, 197, 197, 0.3);
+}
+.Nav-link.active {
+    color:black;
+    background: rgba(112, 197, 197, 0.2);
+    border-left: 3px solid #70c5c5;
+}
+.Nav-icon {
+    margin-right: 10px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.Nav-link:hover .Nav-icon {
+    transform: scale(1.3) rotate(15deg);
+}
+.Menu-toggle {
+    position: fixed;
+    top: 10%;
+    right: 32px;
+    z-index: 1001;
+    background: rgba(112, 197, 197, 0.3);
+    backdrop-filter: blur(20px);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%);
+}
+.Sidebar.active ~ .Menu-toggle {
+    right: 170px;
+    background: rgba(112, 197, 197, 0.5);
+    transform: translateY(-50%) scale(1.2);
+}
+.Menu-toggle:hover {
+    background: rgba(112, 197, 197, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+.Hamburger {
+    width: 12px;
+    height: 1px;
+    background: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.Hamburger::before,
+.Hamburger::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 1px;
+    background: white;
+    left: 0;
+    transition: all 0.3s ease;
+}
+.Hamburger::before {
+    top: -4px;
+}
+.Hamburger::after {
+    top: 4px;
+}
+.Menu-toggle.active .Hamburger {
+    background: transparent;
+}
+.Menu-toggle.active .Hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+.Menu-toggle.active .Hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+.Overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+/*image gallery*/
+.image-gallery {
+    margin: 40px;
+    max-width: 8000px;
+    text-align: center;
+    background: linear-gradient(to right, white 50%, white 50%);
+    border: 1px solid #ccc;
+    background-attachment: fixed;
+}
+/* Heading style */
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+/* Customer display */
+.customer {
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
+    margin: 10px 25px; /* Added px to the first margin value */
+    background: white;
+    padding: 20px;
+}
+/* Customer image style */
+.customer img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+/* Quote style */
+.quote {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+/* Name style */
+.name {
+    font-weight: bold;
+}
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .customer {
+        width: 30%; /* Changes the width for medium screens */
+    }
+}
+@media (max-width: 800px) {
+    .customer {
+        width: 45%; /* Further adjusts width for smaller screens */
+    }
+}
+@media (max-width: 600px) {
+    .customer {
+        width: 100%; /* Full width on small screens */
+        margin: 10px 0; /* Adjust margin for full-width */
+    }
+}
+/* image on top*/
+.background {
+      background-image: url('https://preview.colorlib.com/theme/hepta/images/slider-3.jpg');
+      height: 80vh; /* Full screen height */
+      background-size: cover; /* Cover the whole area */
+      background-position: center; /* Center the image */
+      position: relative;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+.text-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 20px;
+    }
+/* hepta */
+   .hepta-button {
+    position: fixed;
+    top: 20px;
+    left: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 9999;
+  } 
+  .background.h1
+{  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    font-size: 40px; 
+ }
+    
+.background.p
+{  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    font-size: 40px; 
+}
+/* hepta */
+   .hepta-button {
+    position: fixed;
+    top: 20px;
+    left: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 9999;
+  } 
+  .background.h1
+{  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    font-size: 40px; 
+ }
+.background.p
+{  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    font-size: 40px; 
+}
+  </style>
+</head>
+<body>
+   <b></b><a href="index.html" class="hepta-button">Hepta</a></b>
+  <!-- Image on top  -->
+ <div class="background">
+    <div class="text-content">
+      <h1>Contact</h1>
+      <p>A free template by Colorlib. Download and share!</p>
+    </div>
+    <!-- New Sidebar Started -->
+    <button class="Menu-toggle" id="menuToggle">
+        <span class="Hamburger"></span>
+    </button>
+    <div class="Overlay" id="overlay"></div>
+    <div class="Sidebar" id="sidebar">
+        <div class="Sidebar-header">
+            <div class="Logo">Navigation</div>
+        </div>
+        <ul class="Nav-menu">
+            <li class="Nav-item">
+                <a href="index.html" class="Nav-link">
+                    <span class="Nav-icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="hotel.html" class="Nav-link">
+                    <span class="Nav-icon">🏨</span>
+                    <span>Hotels</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="about.html" class="Nav-link">
+                    <span class="Nav-icon">ℹ️</span>
+                    <span>About Us</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="gallery.html" class="Nav-link">
+                    <span class="Nav-icon">🖼️</span>
+                    <span>Gallery</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="news.html" class="Nav-link">
+                    <span class="Nav-icon">📰</span>
+                    <span>News</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="contact.html" class="Nav-link active">
+                    <span class="Nav-icon">📞</span>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- New Sidebar Ended -->
+  </div>
+ <!-- Form -->
+   <div class="container1"> 
+        <form class="contact-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            <label for="message">Write Message</label>
+            <textarea id="message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+     <div class="contact-info">
+            <h2>ADDRESS:</h2>
+            <p>98 West 21th Street, Suite<br>721 New York NY 10016</p>
+            <h2>PHONE:</h2>
+            <p>(+1) 435 3533</p>
+            <h2>EMAIL:</h2>
+            <p>info@yourdomain.com</p>
+        </div>
+    </div>   
+ <div class="image-gallery">
+        <h1>Happy Customers</h1>
+        <div class="customer">
+            <img src="https://preview.colorlib.com/theme/hepta/images/person_1.jpg" alt="Clare Gupta">
+            <p class="quote">"Far far away, behind the word mountains, far from the countries Vokalias and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
+            <p class="name">— Clare Gupta</p>
+        </div>
+        <div class="customer">
+            <img src="https://preview.colorlib.com/theme/hepta/images/person_2.jpg" alt="Rogie Slater">
+            <p class="quote">"Far far away, behind the word mountains, far from the countries Vokalias and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
+            <p class="name">— Rogie Slater</p>
+        </div>
+        <div class="customer">
+            <img src="https://preview.colorlib.com/theme/hepta/images/person_3.jpg" alt="John Doe">
+            <p class="quote">"Far far away, behind the word mountains, far from the countries Vokalias and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
+            <p class="name">— John Doe</p>
+        </div>
+    </div>
+<!--image gallery-->
+  <!-- Footer Started -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-col">
+          <h4>Quick Link</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Rooms</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Our Location</a></li>
+            <li><a href="#">The Hosts</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Restaurant</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <p><em>Address:</em><br>98 West 21th Street, Suite 721<br>New York NY 10016</p>
+          <p><em>Phone:</em><br>(+1) 435 3533</p>
+          <p><em>Email:</em><br><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Subscribe</h4>
+          <p>Sign up for our newsletter</p>
+          <form class="subscribe-form">
+            <input type="email" placeholder="Your email..." required />
+            <button type="submit">✈️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright © 2025 All rights reserved | This template is made with <span>♥</span> by Colorlib</p>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+  <!-- Footer Ended -->
+  <script>
+    // New Sidebar JavaScript
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const navLinks = document.querySelectorAll('.Nav-link');
+    function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        menuToggle.classList.add('active');
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+    menuToggle.addEventListener('click', () => {
+        if (sidebar.classList.contains('active')) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    });
+    overlay.addEventListener('click', closeSidebar);
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+  </script>
+</body>
+</html>

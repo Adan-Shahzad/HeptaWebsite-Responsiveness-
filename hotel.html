@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+/* New Sidebar Styles */
+.Sidebar {
+    position: fixed;
+    top: 10%;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: aliceblue;
+    backdrop-filter: blur(20px);
+    border-radius: 50%;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%);
+    overflow: hidden;
+}
+.Sidebar.active {
+    width: 300px;
+    height: 470px;
+    border-radius: 20px;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+.Sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(112, 197, 197, 0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease 0.2s;
+}
+.Sidebar.active .Sidebar-header {
+    opacity: 1;
+    transform: translateY(0);
+}
+.Logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.Nav-menu {
+    list-style: none;
+    padding: 10px 0;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease 0.3s;
+}
+.Sidebar.active .Nav-menu {
+    opacity: 1;
+    transform: scale(1);
+}
+.Nav-item {
+    margin: 0;
+    opacity: 0;
+    transform: translateX(30px) rotate(10deg);
+    transition: all 0.4s ease;
+}
+.Sidebar.active .Nav-item {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+}
+
+.Sidebar.active .Nav-item:nth-child(1) { transition-delay: 0.4s; }
+.Sidebar.active .Nav-item:nth-child(2) { transition-delay: 0.5s; }
+.Sidebar.active .Nav-item:nth-child(3) { transition-delay: 0.6s; }
+.Sidebar.active .Nav-item:nth-child(4) { transition-delay: 0.7s; }
+.Sidebar.active .Nav-item:nth-child(5) { transition-delay: 0.8s; }
+.Sidebar.active .Nav-item:nth-child(6) { transition-delay: 0.9s; }
+.Nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color:black;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 2px 10px;
+}
+.Nav-link:hover {
+    color: white;
+    background: rgba(112, 197, 197, 0.3);
+    transform: translateX(-5px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(112, 197, 197, 0.3);
+}
+.Nav-link.active {
+    color:black;
+    background: rgba(112, 197, 197, 0.2);
+    border-left: 3px solid #70c5c5;
+}
+.Nav-icon {
+    margin-right: 10px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.Nav-link:hover .Nav-icon {
+    transform: scale(1.3) rotate(15deg);
+}
+.Menu-toggle {
+    position: fixed;
+    top: 10%;
+    right: 32px;
+    z-index: 1001;
+    background: rgba(112, 197, 197, 0.3);
+    backdrop-filter: blur(20px);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%);
+}
+.Sidebar.active ~ .Menu-toggle {
+    right: 170px;
+    background: rgba(112, 197, 197, 0.5);
+    transform: translateY(-50%) scale(1.2);
+}
+.Menu-toggle:hover {
+    background: rgba(112, 197, 197, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+.Hamburger {
+    width: 12px;
+    height: 1px;
+    background: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.Hamburger::before,
+.Hamburger::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 1px;
+    background: white;
+    left: 0;
+    transition: all 0.3s ease;
+}
+.Hamburger::before {
+    top: -4px;
+}
+.Hamburger::after {
+    top: 4px;
+}
+.Menu-toggle.active .Hamburger {
+    background: transparent;
+}
+.Menu-toggle.active .Hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+.Menu-toggle.active .Hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+.Overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+ /* Features Section */
+.features {
+    max-width: 90rem; /* Changed from 1500px to rem for responsiveness */
+    padding: 6rem 2rem; /* Added horizontal padding for smaller screens */
+    background: #f8f9fa;
+}        
+.section-title {
+    max-width: 90rem; /* Changed from 1500px to rem for responsiveness */
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: black;
+}
+.features-grid {
+    max-width: 90rem; /* Changed from 1500px to rem for responsiveness */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); /* Changed minmax value to rem */
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.feature-card {
+    max-width: 90rem; /* Changed from 1500px to rem for responsiveness */
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem; /* Changed to rem for consistency */
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1); /* Changed to rem for consistency */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+.feature-card:hover {
+    transform: translateY(-1rem); /* Changed to rem for consistency */
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.15); /* Changed to rem for consistency */
+}
+.feature-icon {
+    width: 5rem; /* Changed to rem for consistency */
+    height: 5rem; /* Changed to rem for consistency */
+    background-color: #70c5c5;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+.feature-card p {
+    color: #666;
+    line-height: 1.8;
+}
+/* About Section */
+.about {
+    padding: 6rem 2rem; /* Added horizontal padding for smaller screens */
+    background: white;
+}
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: black;
+}
+.about-text p {
+    margin-bottom: 1.5rem;
+    color: black;
+    line-height: 1.8;
+}
+.about-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem; /* Changed to rem for consistency */
+    box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.1); /* Changed to rem for consistency */
+}
+.about-image img {
+    width: 100%;
+    height: auto; /* Changed to auto for responsive height */
+    max-height: 25rem; /* Set a max height in rem for responsiveness */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.about-image:hover img {
+    transform: scale(1.05);
+}
+/* Services Section */
+.services {
+    padding: 6rem 2rem; /* Added horizontal padding for smaller screens */
+    background-color: #70c5c5;
+    color: white;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* Changed minmax value to rem */
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.service-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 1rem; /* Changed to rem for consistency */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+.service-item:hover {
+    transform: translateY(-0.5rem); /* Changed to rem for consistency */
+}
+.service-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+.service-item p {
+    opacity: 0.9;
+    line-height: 1.6;
+    color: black;
+}
+/* Animations */
+ @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+/* Responsive Design */
+        @media (max-width: 768px) {
+.hero-content h1 {
+                font-size: 2.5rem;
+            }
+.hero-content p {
+                font-size: 1.2rem;
+            }
+.about-content {
+                grid-template-columns: 1fr;
+            }
+.section-title {
+                font-size: 2rem;
+            }
+        }  
+/* Smooth scrolling */
+html {
+            scroll-behavior: smooth;
+        }   
+/* Scroll reveal animation */
+.reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+.reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+/*Footer Started*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.footer {
+  background-color: #111;
+  color: #ccc;
+  padding: 50px 20px 20px;
+  margin-top: 40px; 
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.footer-col {
+  flex: 1 1 220px;
+  margin: 20px;
+}
+.footer-col h4 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.footer-col ul {
+  list-style: none;
+}
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ccc;
+  display: block;
+  margin: 8px 0;
+  transition: color 0.3s;
+}
+.footer-col ul li a:hover {
+  color: #4CAF50;
+}
+.footer-col p, .footer-col a {
+  font-size: 15px;
+  color: #ccc;
+  line-height: 1.6;
+}
+.footer-col em {
+  font-style: italic;
+  font-weight: 400;
+}
+.subscribe-form {
+  display: flex;
+  border-bottom: 1px solid #666;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+.subscribe-form input {
+  flex: 1;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  outline: none;
+}
+.subscribe-form button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.subscribe-form button:hover {
+  color: #4CAF50;
+}
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #222;
+  color: #888;
+  font-size: 14px;
+}
+.footer-bottom span {
+  color: white;
+}
+.social-icons {
+      margin-top: 10px;
+      text-align: center;
+    }
+.social-icons a {
+  margin-right:50px;
+      color: white;
+      margin: 0 15px;
+      font-size: 22px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.3s;
+    }
+.social-icons a:hover {
+      color:#70c5c5; 
+    }
+/*Footer Ended*/
+/* image on top */
+.background {
+        background-image: url('https://preview.colorlib.com/theme/hepta/images/slider-4.jpg');
+        height: 90vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .text-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 20px;
+        z-index: 2;
+    }
+/* hepta */
+   .hepta-button {
+    position: fixed;
+    top: 20px;
+    left: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 9999;
+  } 
+  .background.h1
+{  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    font-size: 40px; 
+ }
+.background.p
+{  
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold; 
+    font-size: 40px; 
+}
+  </style>
+</head>
+<body>
+   <a href="index.html" class="hepta-button">Hepta</a>
+    <!-- Image on top  -->
+ <div class="background">
+    <div class="text-content">
+        <h1>Our Hotel</h1>
+        <p>A free template by Colorlib. Download and share!</p>
+    </div>
+ </div>
+     <!-- New Sidebar Started -->
+    <button class="Menu-toggle" id="menuToggle">
+        <span class="Hamburger"></span>
+    </button>
+    <div class="Overlay" id="overlay"></div>
+    <div class="Sidebar" id="sidebar">
+        <div class="Sidebar-header">
+            <div class="Logo">Navigation</div>
+        </div>
+        <ul class="Nav-menu">
+            <li class="Nav-item">
+                <a href="index.html" class="Nav-link">
+                    <span class="Nav-icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="hotel.html" class="Nav-link active">
+                    <span class="Nav-icon">🏨</span>
+                    <span>Hotels</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="about.html" class="Nav-link">
+                    <span class="Nav-icon">ℹ️</span>
+                    <span>About Us</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="gallery.html" class="Nav-link">
+                    <span class="Nav-icon">🖼️</span>
+                    <span>Gallery</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="news.html" class="Nav-link">
+                    <span class="Nav-icon">📰</span>
+                    <span>News</span>
+                </a>
+            </li>
+            <li class="Nav-item">
+                <a href="contact.html" class="Nav-link">
+                    <span class="Nav-icon">📞</span>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- New Sidebar Ended -->
+  <script>
+     // New Sidebar JavaScript
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const navLinks = document.querySelectorAll('.Nav-link');
+    function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        menuToggle.classList.add('active');
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+    menuToggle.addEventListener('click', () => {
+        if (sidebar.classList.contains('active')) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    });
+    overlay.addEventListener('click', closeSidebar);
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+  </script>
+   <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title reveal">Hotel Features</h2>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🏨</div>
+                    <h3>Luxury Rooms</h3>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Fine Dining</h3>
+                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🏊</div>
+                    <h3>Swimming Pool</h3>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Free Parking</h3>
+                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text decided to leave.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📶</div>
+                    <h3>Free WiFi</h3>
+                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">💆</div>
+                    <h3>Spa & Wellness</h3>
+                    <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn't listen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text reveal">
+                    <h2>More Hotel Features</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In dolor, iusto doloremque quo odio repudiandae sunt eveniet? Enim facilis laborum voluptate id porro, culpa maiores quis, blanditiis laboriosam alias. Sed.</p>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                </div>
+                <div class="about-image reveal">
+                    <img src="https://preview.colorlib.com/theme/hepta/images/img_1_long.jpg" alt="Hotel Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title reveal">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item reveal">
+                    <h3>24/7 Room Service</h3>
+                    <p>Round-the-clock room service to cater to all your needs, ensuring maximum comfort during your stay.</p>
+                </div>
+                <div class="service-item reveal">
+                    <h3>Concierge Service</h3>
+                    <p>Our experienced concierge team is ready to assist you with reservations, recommendations, and local attractions.</p>
+                </div>
+                <div class="service-item reveal">
+                    <h3>Airport Shuttle</h3>
+                    <p>Complimentary airport shuttle service available for all guests, making your arrival and departure hassle-free.</p>
+                </div>
+                <div class="service-item reveal">
+                    <h3>Business Center</h3>
+                    <p>Fully equipped business center with high-speed internet, printing facilities, and meeting rooms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                } else {
+                    element.classList.remove('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        
+        // Initialize reveal on page load
+        reveal();
+    </script>
+
+  <!-- Footer Started -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-col">
+          <h4>Quick Link</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Rooms</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Our Location</a></li>
+            <li><a href="#">The Hosts</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Restaurant</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <p><em>Address:</em><br>98 West 21th Street, Suite 721<br>New York NY 10016</p>
+          <p><em>Phone:</em><br>(+1) 435 3533</p>
+          <p><em>Email:</em><br><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Subscribe</h4>
+          <p>Sign up for our newsletter</p>
+          <form class="subscribe-form">
+            <input type="email" placeholder="Your email..." required />
+            <button type="submit">✈️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright © 2025 All rights reserved | This template is made with <span>♥</span> by Colorlib</p>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+  <!-- Footer Ended -->
+</body>
+</html>
